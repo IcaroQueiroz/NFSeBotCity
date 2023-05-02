@@ -1,0 +1,14 @@
+MANIFEST.in
+README.md
+VERSION
+requirements.txt
+setup.py
+botRecife/__init__.py
+botRecife/__main__.py
+botRecife/bot.py
+botRecife.egg-info/PKG-INFO
+botRecife.egg-info/SOURCES.txt
+botRecife.egg-info/dependency_links.txt
+botRecife.egg-info/requires.txt
+botRecife.egg-info/top_level.txt
+botRecife/resources/start.png
