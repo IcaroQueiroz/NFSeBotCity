@@ -38,7 +38,6 @@ class Bot(DesktopBot):
 
         # Opens the BotCity website.
         self.browse("https://nfse.recife.pe.gov.br/capa.aspx")
-        self.wait
         self.certificado()
 
         # Uncomment to mark this task as finished on BotMaestro
