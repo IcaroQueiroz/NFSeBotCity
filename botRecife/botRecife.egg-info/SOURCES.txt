@@ -11,4 +11,5 @@ botRecife.egg-info/SOURCES.txt
 botRecife.egg-info/dependency_links.txt
 botRecife.egg-info/requires.txt
 botRecife.egg-info/top_level.txt
+botRecife/resources/acessarSistema.png
 botRecife/resources/start.png
