@@ -19,100 +19,55 @@ To fix this, you can either:
 
 Please refer to the documentation for more information at https://documentation.botcity.dev/
 """
-import xml.etree.ElementTree as ET
-import pandas as pd
+
+from botcity.web import WebBot, Browser
 from botcity.core import DesktopBot
 # Uncomment the line below for integrations with BotMaestro
 # Using the Maestro SDK
 # from botcity.maestro import *
 
-class Dados():
-    def pandas_dados(self):
-        self.dados_df = pd.read_excel("Dados.xlsx")
-        self.dti = f'{self.dados_df.loc[1, "data_in"]:%d/%m/%Y}'
-        self.dtf = f'{self.dados_df.loc[1, "data_fim"]:%d/%m/%Y}'
-        self.resumo = ' NFSE RESUMO '
-        self.talao = ' NFSE '
-        self.xsai = ' XML SAIDAS '
-        self.xent = ' XML ENTRADAS '
-        self.exten = '.xml'
-        self.barra = "\\"
-        self.linkConsultas="https://nfse.recife.pe.gov.br/contribuinte/consultas.aspx"
-        self.linkTalao="https://nfse.recife.pe.gov.br/contribuinte/tfe.aspx"
-        print(self.dados_df)
 
-class Comandos():
-    def executar_metodos(self):
-            for metodo in self.metodos_esperad:
-                if hasattr(self, metodo):
-                    # Executa o método e adiciona à lista de executados
-                    getattr(self, metodo)()
-    
-    def clicandoAqui(self):
-        if self.find( "clicandoAqui", matching=0.97, waiting_time=5000):
-            self.click()
-    def ronaldoXavier(self):
-        if self.find( "ronaldoXavier", matching=0.97, waiting_time=15000):
-            self.click()  
-        if self.find( "ronaldoXavier", matching=0.97, waiting_time=10000):
-            self.click()               
-        if not self.find( "okCertificadoChrome", matching=0.97, waiting_time=60000):
-            self.not_found("okCertificadoChrome")
-        self.click() 
-        if not self.find( "acessarSistema", matching=0.97, waiting_time=60000):
-            self.not_found("acessarSistema")
-        self.click() 
-        if not self.find( "minhaEmpresa", matching=0.97, waiting_time=60000):
-            self.not_found("minhaEmpresa")
-        self.click() 
-        if not self.find( "acessarMensagens", matching=0.97, waiting_time=60000):
-            self.not_found("acessarMensagens")
-        self.click() 
-        if not self.find( "Consultas", matching=0.97, waiting_time=60000):
-            self.not_found("Consultas")
-        self.click() 
-
-
-
-
-
-
-class Bot(DesktopBot, Dados, Comandos):
+class Bot(WebBot):
     def action(self, execution=None):
-        self.executar_metodos()
-        self.pandas_dados()
+        # Uncomment to silence Maestro errors when disconnected
+        # if self.maestro:
+        #     self.maestro.RAISE_NOT_CONNECTED = False
 
+        # Configure whether or not to run on headless mode
+        self.headless = False
 
-    def login_inicial(self):
-        self.browse("https://nfse.recife.pe.gov.br/senhaweb/login.aspx")
-        if not self.find( "clicandoAqui", matching=0.97, waiting_time=60000):
-            self.not_found("clicandoAqui")
-        self.click()
-        if self.find( "ronaldoXavier", matching=0.97, waiting_time=10000):
-            self.click()               
-        if not self.find( "okCertificadoChrome", matching=0.97, waiting_time=60000):
-            self.not_found("okCertificadoChrome")
-        self.click() 
-        if not self.find( "acessarSistema", matching=0.97, waiting_time=60000):
-            self.not_found("acessarSistema")
-        self.click() 
-        if not self.find( "minhaEmpresa", matching=0.97, waiting_time=60000):
-            self.not_found("minhaEmpresa")
-        self.click() 
-        if not self.find( "acessarMensagens", matching=0.97, waiting_time=60000):
-            self.not_found("acessarMensagens")
-        self.click() 
-        if not self.find( "Consultas", matching=0.97, waiting_time=60000):
-            self.not_found("Consultas")
-        self.click() 
+        # Instantiate a DesktopBot
+        desktop_bot = DesktopBot()
+        # Execute operations with the DesktopBot as desired
+        # desktop_bot.control_a()
+        # desktop_bot.control_c()
+        # desktop_bot.get_clipboard()
 
-        
+        # Uncomment to change the default Browser to Firefox
+        # self.browser = Browser.FIREFOX
 
-    def sessao_expirou(self):   
-        if not self.find( "acessarSistema", matching=0.97, waiting_time=10000):
-            self.not_found("acessarSistema")
-        self.click()
+        # Uncomment to set the WebDriver path
+        self.driver_path = ".\chromedriver.exe"
 
+        # Fetch the Activity ID from the task:
+        # task = self.maestro.get_task(execution.task_id)
+        # activity_id = task.activity_id
+
+        # Opens the BotCity website.
+        self.browse("https://www.botcity.dev")
+
+        # Uncomment to mark this task as finished on BotMaestro
+        # self.maestro.finish_task(
+        #     task_id=execution.task_id,
+        #     status=AutomationTaskFinishStatus.SUCCESS,
+        #     message="Task Finished OK."
+        # )
+
+        # Wait for 10 seconds before closing
+        self.wait(10000)
+
+        # Stop the browser and clean up
+        self.stop_browser()
 
     def not_found(self, label):
         print(f"Element not found: {label}")
@@ -120,6 +75,3 @@ class Bot(DesktopBot, Dados, Comandos):
 
 if __name__ == '__main__':
     Bot.main()
-
-
-

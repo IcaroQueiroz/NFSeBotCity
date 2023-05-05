@@ -20,7 +20,7 @@ with open(path.join(here, 'requirements.txt')) as requirements_file:
 setup(
     name="botRecife",
     version=version,
-    description="Bot Recife",
+    description="botRecife",
     long_description=readme,
     long_description_content_type='text/markdown',
     packages=find_packages(exclude=['docs', 'tests']),
