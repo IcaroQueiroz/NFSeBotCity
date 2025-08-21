@@ -1,6 +1,6 @@
-# NFSeBotCity – Automação de Rotinas NFS-e Recife
+# NFSeBotCity – Automação de Rotinas NFS-e
 
-Automação para download e controle de Notas Fiscais de Serviço Eletrônicas (NFS-e) do município do Recife. O objetivo é agilizar a rotina fiscal e eliminar processos manuais.
+Automação para download e controle de Notas Fiscais de Serviço Eletrônicas (NFS-e). O objetivo é agilizar a rotina fiscal e eliminar processos manuais.
 
 ---
 
