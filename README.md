@@ -23,4 +23,14 @@ Automação para download e controle de Notas Fiscais de Serviço Eletrônicas (
 
 ---
 
+## Estrutura Escalável
+
+O projeto foi pensado para crescer e atender diferentes municípios.  
+Atualmente, temos:
+
+- **botRecife** – Automação para o portal da Prefeitura do Recife ✅  
+- **botOlinda** – (em planejamento)  
+- **botPaulista** – (em planejamento)  
+
+---
 
